@@ -15,7 +15,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", '"https://reqres.in/api/"')
     }
@@ -78,5 +78,8 @@ dependencies {
 
     //refresh layout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    //multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
 
 }
