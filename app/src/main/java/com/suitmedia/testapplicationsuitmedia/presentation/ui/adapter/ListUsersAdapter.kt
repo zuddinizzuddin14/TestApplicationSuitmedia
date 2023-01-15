@@ -22,6 +22,12 @@ class ListUsersAdapter : RecyclerView.Adapter<ListUsersAdapter.DataViewHolder>()
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearItem() {
+        this.items.clear()
+        notifyDataSetChanged()
+    }
+
     fun actionClick(onUserItem: OnUserItem){
         this.onUserItem = onUserItem
     }

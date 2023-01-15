@@ -30,23 +30,25 @@ class UserViewModel @Inject constructor(
         get() = _errorState
 
     fun getListUsers(page: Int) {
-        _loadingState.postValue(true)
+        loadingErrorState(loading = true, error = false, e = null)
         viewModelScope.launch(Dispatchers.IO) {
-            _errorState.postValue(Pair(false, null))
             try {
                 val response = userRepository.getListUsers(page)
                 viewModelScope.launch(Dispatchers.Main) {
                     _listUsers.postValue(response)
-                    _loadingState.postValue(false)
-                    _errorState.postValue(Pair(false, null))
+                    loadingErrorState(loading = false, error = false, e = null)
                 }
             } catch (e: Exception) {
                 viewModelScope.launch(Dispatchers.Main) {
-                    _loadingState.postValue(false)
-                    _errorState.postValue(Pair(true, e))
+                    loadingErrorState(loading = false, error = true, e = e)
                 }
             }
         }
+    }
+
+    private fun loadingErrorState(loading: Boolean, error: Boolean, e: Exception?) {
+        _loadingState.postValue(loading)
+        _errorState.postValue(Pair(error, e))
     }
 
 }

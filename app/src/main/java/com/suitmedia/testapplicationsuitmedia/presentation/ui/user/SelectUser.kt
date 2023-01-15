@@ -48,6 +48,12 @@ class SelectUser : AppCompatActivity() {
                     finish()
                 }
             })
+            slListUsers.setOnRefreshListener {
+                currentPage = 1
+                listUsersAdapter.clearItem()
+                observeData()
+                slListUsers.isRefreshing = false
+            }
         }
     }
 
@@ -57,26 +63,26 @@ class SelectUser : AppCompatActivity() {
             userViewModel.getListUsers(currentPage)
             userViewModel.listUsers.observe(this@SelectUser) { listUsers ->
                 val data = listUsers.payload?.data
-                if (data.isNullOrEmpty().not()) data?.let { listUsersAdapter.setItem(it) }
+                if (data.isNullOrEmpty().not()) data?.let { listUsersAdapter.setItem(it)}
                 else maxPage = true
             }
             userViewModel.loadingState.observe(this@SelectUser) {
                 if (it) {
                     pbLoading.visibility = View.VISIBLE
-                    rvListUsers.visibility = View.GONE
+                    slListUsers.visibility = View.GONE
                 } else {
                     pbLoading.visibility = View.GONE
-                    rvListUsers.visibility = View.VISIBLE
+                    slListUsers.visibility = View.VISIBLE
                 }
             }
             userViewModel.errorState.observe(this@SelectUser) {
                 if (it.first) {
                     tvError.visibility = View.VISIBLE
                     tvError.text = it.second?.message
-                    rvListUsers.visibility = View.GONE
+                    slListUsers.visibility = View.GONE
                 } else {
                     tvError.visibility = View.GONE
-                    rvListUsers.visibility = View.VISIBLE
+                    slListUsers.visibility = View.VISIBLE
                 }
             }
         }
