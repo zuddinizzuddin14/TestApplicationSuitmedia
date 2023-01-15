@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">TestApplicationSuitmedia</string>
+    <string name="text_name">Name</string>
+    <string name="text_email">Email</string>
+    <string name="text_not_found">Not Found</string>
+    <string name="text_palindrome">Palindrome</string>
+    <string name="text_photo">Photo</string>
+    <string name="text_check">Check</string>
+    <string name="text_next">Next</string>
+    <string name="text_back">Back</string>
+    <string name="text_title_second">Second Screen</string>
+    <string name="text_title_third">Third Screen</string>
+    <string name="text_welcome">Welcome</string>
+    <string name="text_choose">Choose a User</string>
+    <string name="text_selected_user_name">Selected User Name</string>
+    <string name="text_no_more">No More Data Founded</string>
+</resources>
